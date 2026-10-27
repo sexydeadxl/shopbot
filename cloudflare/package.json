@@ -1,0 +1,7 @@
+{
+  "name": "shoopbot-d1",
+  "private": true,
+  "type": "module",
+  "scripts": {"dev": "wrangler dev", "deploy": "wrangler deploy", "test:server": "node local-test-server.mjs"},
+  "devDependencies": {"wrangler": "4.150.0", "miniflare": "5.20261006.2-beta"}
+}

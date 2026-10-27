@@ -1,0 +1,19 @@
+services:
+  - type: worker
+    name: shoopbot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: TELEGRAM_API_ID
+        sync: false
+      - key: TELEGRAM_API_HASH
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: D1_WORKER_URL
+        sync: false
+      - key: D1_WORKER_TOKEN
+        sync: false
+      - key: SUPPLIER_ENCRYPTION_KEY
+        sync: false

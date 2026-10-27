@@ -1,0 +1,13 @@
+.env
+.dev.vars
+.supplier-key
+*.db
+*.db-wal
+*.db-shm
+*.session
+*.session-journal
+__pycache__/
+node_modules/
+.wrangler/
+d1-migration*/
+*.snapshot.db

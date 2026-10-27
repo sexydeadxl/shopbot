@@ -1,0 +1,5 @@
+aiohttp>=3.10,<4
+python-dotenv>=1,<2
+cryptography>=43
+telethon>=1.45,<2
+

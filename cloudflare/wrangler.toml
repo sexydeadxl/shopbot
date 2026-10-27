@@ -1,0 +1,8 @@
+name = "shoopbot-d1"
+main = "worker.js"
+compatibility_date = "2026-10-13"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "shopbot"
+database_id = "718f2a6d-9628-41f1-bae9-9ee39b2d864b"
