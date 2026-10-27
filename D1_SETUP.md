@@ -129,9 +129,9 @@ instead. Existing startup migrations add any missing application columns/tables.
 
 ## Deploy the Telegram bot on Render
 
-This repository includes a `render.yaml` Blueprint for a Render **Background
-Worker**. The Telegram bot maintains a long-lived connection and is not an HTTP
-web service, so do not deploy it as a Render Web Service.
+This repository includes a `render.yaml` Blueprint for a free Render **Web
+Service**. The bot starts a lightweight `/healthz` endpoint on Render's `PORT`
+while maintaining its long-lived Telegram connection.
 
 1. Push the repository to a Git provider and create a Blueprint on Render from
    that repository.
@@ -142,7 +142,7 @@ web service, so do not deploy it as a Render Web Service.
    existing Fernet key. Do not generate a new key or supplier credentials in
    D1 will become unreadable.
 
-The worker uses `bot.py` as its entry point. Render's filesystem is ephemeral;
+The service uses `bot.py` as its entry point. Render's filesystem is ephemeral;
 application data must remain in D1. The Telegram session is recreated when
 needed, while images are packaged with the repository. Do not commit `.env`,
 `.supplier-key`, or any other secret.

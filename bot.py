@@ -16,6 +16,7 @@ import contextlib
 from contextlib import asynccontextmanager
 
 import aiohttp
+from aiohttp import web
 from telethon import TelegramClient, events, Button, errors
 
 from suppliers import SupplierService, SupplierError
@@ -5106,6 +5107,19 @@ async def send_typing_code(
 # ══════════════════════════════════════════════════════════════════════  ════════
 
 client = TelegramClient("premium_bot", API_ID, API_HASH)
+_health_runner = None
+
+
+async def start_health_server():
+    global _health_runner
+    port = int(os.environ.get("PORT", "10000"))
+    app = web.Application()
+    app.router.add_get("/healthz", lambda request: web.json_response({"status": "ok"}))
+    _health_runner = web.AppRunner(app)
+    await _health_runner.setup()
+    site = web.TCPSite(_health_runner, "0.0.0.0", port)
+    await site.start()
+    print(f"Health server listening on port {port}.")
 
 
 # ── Premium (custom) emoji parse mode ──────────────────────────────────────────
@@ -11086,5 +11100,6 @@ if __name__ == "__main__":
     loop.run_until_complete(_startup())
     client.start(bot_token=BOT_TOKEN)
     loop.run_until_complete(_post_start())
+    loop.run_until_complete(start_health_server())
     print("Bot is running.")
     client.run_until_disconnected()

@@ -1,9 +1,11 @@
 services:
-  - type: worker
+  - type: web
     name: shoopbot
     runtime: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
+    healthCheckPath: /healthz
     envVars:
       - key: TELEGRAM_API_ID
         sync: false
